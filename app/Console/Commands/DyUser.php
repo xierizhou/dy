@@ -131,7 +131,7 @@ class DyUser extends Command
         });
         $pro1->start();*/
 
-        dd($this->get_rand_ip());
+        //dd($this->get_rand_ip());
 
         $pro1 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
