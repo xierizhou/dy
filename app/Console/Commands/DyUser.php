@@ -137,7 +137,13 @@ class DyUser extends Command
             echo $p->pid;
             for ($i=55000000001;$i<56000000000;$i++){
 
-                $ip = $this->get_rand_ip();
+                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+                $randarr= mt_rand(0,count($arr_1));
+                $ip1id = $arr_1[$randarr];
+                $ip2id=  round(rand(600000,  2550000)  /  10000);
+                $ip3id=  round(rand(600000,  2550000)  /  10000);
+                $ip4id=  round(rand(600000,  2550000)  /  10000);
+                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
 
                 file_put_contents(public_path("sql-6-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
@@ -157,7 +163,16 @@ class DyUser extends Command
         $pro2 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=56000000001;$i<57000000000;$i++){
-                $ip = $this->get_rand_ip();
+
+                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+                $randarr= mt_rand(0,count($arr_1));
+                $ip1id = $arr_1[$randarr];
+                $ip2id=  round(rand(600000,  2550000)  /  10000);
+                $ip3id=  round(rand(600000,  2550000)  /  10000);
+                $ip4id=  round(rand(600000,  2550000)  /  10000);
+                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
+
+
                 file_put_contents(public_path("sql-7-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -176,7 +191,17 @@ class DyUser extends Command
         $pro3 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=57000000001;$i<58000000000;$i++){
-                $ip = $this->get_rand_ip();
+
+
+                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+                $randarr= mt_rand(0,count($arr_1));
+                $ip1id = $arr_1[$randarr];
+                $ip2id=  round(rand(600000,  2550000)  /  10000);
+                $ip3id=  round(rand(600000,  2550000)  /  10000);
+                $ip4id=  round(rand(600000,  2550000)  /  10000);
+                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
+
+
                 file_put_contents(public_path("sql-8-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -195,7 +220,17 @@ class DyUser extends Command
         $pro4 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=58000000001;$i<59000000000;$i++){
-                $ip = $this->get_rand_ip();
+
+
+                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+                $randarr= mt_rand(0,count($arr_1));
+                $ip1id = $arr_1[$randarr];
+                $ip2id=  round(rand(600000,  2550000)  /  10000);
+                $ip3id=  round(rand(600000,  2550000)  /  10000);
+                $ip4id=  round(rand(600000,  2550000)  /  10000);
+                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
+
+
                 file_put_contents(public_path("sql-9-s.txt"),"$i");
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -215,7 +250,17 @@ class DyUser extends Command
             echo $p->pid;
 
             for ($i=59000000001;$i<60000000000;$i++){
-                $ip = $this->get_rand_ip();
+
+
+                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+                $randarr= mt_rand(0,count($arr_1));
+                $ip1id = $arr_1[$randarr];
+                $ip2id=  round(rand(600000,  2550000)  /  10000);
+                $ip3id=  round(rand(600000,  2550000)  /  10000);
+                $ip4id=  round(rand(600000,  2550000)  /  10000);
+                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
+
+
                 file_put_contents(public_path("sql-10-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
