@@ -135,32 +135,28 @@ class DyUser extends Command
 
         $pro1 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
-            for ($i=55000000001;$i<56000000000;$i++){
+            $ip = $this->get_rand_ip();
+            var_dump($ip);
+            /*for ($i=55000000001;$i<56000000000;$i++){
 
-                $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
-                $randarr= mt_rand(0,count($arr_1));
-                $ip1id = $arr_1[$randarr];
-                $ip2id=  round(rand(600000,  2550000)  /  10000);
-                $ip3id=  round(rand(600000,  2550000)  /  10000);
-                $ip4id=  round(rand(600000,  2550000)  /  10000);
-                $ip =  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
+
+                dd($ip);
 
                 file_put_contents(public_path("sql-6-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
                 $dytk =  getDyTkSign::get($data);
                 if(!preg_match("/^[A-Za-z0-9]+$/",$dytk)){
-                    //dd("不能包含中文和特殊字符！");
                     continue;
 
                 }
                 file_put_contents(public_path("sql-6.txt"),"('$url'),",FILE_APPEND);
 
-            }
+            }*/
         });
         $pro1->start();
 
-        $pro2 = new \swoole_process(function(\swoole_process $p){
+        /*$pro2 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=56000000001;$i<57000000000;$i++){
 
@@ -274,7 +270,7 @@ class DyUser extends Command
 
             }
         });
-        $pro5->start();
+        $pro5->start();*/
 
 
         \swoole_process::wait();
