@@ -131,7 +131,7 @@ class DyUser extends Command
         });
         $pro1->start();*/
 
-
+        dd($this->get_rand_ip());
 
         $pro1 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
@@ -154,7 +154,7 @@ class DyUser extends Command
         });
         $pro1->start();
 
-        $pro1 = new \swoole_process(function(\swoole_process $p){
+        $pro2 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=56000000001;$i<57000000000;$i++){
                 $ip = $this->get_rand_ip();
@@ -171,9 +171,9 @@ class DyUser extends Command
 
             }
         });
-        $pro1->start();
+        $pro2->start();
 
-        $pro1 = new \swoole_process(function(\swoole_process $p){
+        $pro3 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=57000000001;$i<58000000000;$i++){
                 $ip = $this->get_rand_ip();
@@ -190,9 +190,9 @@ class DyUser extends Command
 
             }
         });
-        $pro1->start();
+        $pro3->start();
 
-        $pro1 = new \swoole_process(function(\swoole_process $p){
+        $pro4 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=58000000001;$i<59000000000;$i++){
                 $ip = $this->get_rand_ip();
@@ -209,9 +209,9 @@ class DyUser extends Command
 
             }
         });
-        $pro1->start();
+        $pro4->start();
 
-        $pro1 = new \swoole_process(function(\swoole_process $p){
+        $pro5 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
 
             for ($i=59000000001;$i<60000000000;$i++){
@@ -229,7 +229,7 @@ class DyUser extends Command
 
             }
         });
-        $pro1->start();
+        $pro5->start();
 
 
         \swoole_process::wait();
