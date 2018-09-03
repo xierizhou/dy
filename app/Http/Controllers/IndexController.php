@@ -11,10 +11,12 @@ class IndexController extends Controller
     public function test(){
 
 
-        $url = "https://www.douyin.com/share/user/1";
-        $data = GetMethod::make($url)->setReferer("https://www.douyin.com")->request();
+        $url = "https://www.douyin.com/share/user/57720812347";
+        $ip = $this->get_rand_ip();
+        $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
+        dd($data);
         $dytk =  getDyTkSign::get($data);
-        dd($dytk);
+
 
 /*        $sign =   getSignature::get(57720812347,$data);
 
@@ -33,5 +35,15 @@ class IndexController extends Controller
 
     public function signature(Request $request){
         file_put_contents(public_path('test1.txt'),serialize($request->all()));
+    }
+
+    public function get_rand_ip(){
+        $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
+        $randarr= mt_rand(0,count($arr_1));
+        $ip1id = $arr_1[$randarr];
+        $ip2id=  round(rand(600000,  2550000)  /  10000);
+        $ip3id=  round(rand(600000,  2550000)  /  10000);
+        $ip4id=  round(rand(600000,  2550000)  /  10000);
+        return  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
     }
 }
