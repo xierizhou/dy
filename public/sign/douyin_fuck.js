@@ -239,3 +239,10 @@ function generateSignature(userId) {
     return e.sign(userId)
 }
 sign_str = generateSignature(getuid());
+
+
+
+$.post('/getSignature',{sign:sign_str,uid:getuid()},function(result){
+
+},'json');
+

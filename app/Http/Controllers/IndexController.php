@@ -14,7 +14,7 @@ class IndexController extends Controller
         $url = "https://www.douyin.com/share/user/57720812347";
         $ip = $this->get_rand_ip();
         $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
-        dd($data);
+
         $dytk =  getDyTkSign::get($data);
 
 
