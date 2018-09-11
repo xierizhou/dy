@@ -47,9 +47,7 @@ class getDyUser extends Command
         $num = ceil(count($temp) / $this->process_num);
         $new_temp = array_chunk($temp->toArray(),$num);
 
-        $new_temp = [
-            ['ds'],['dg'],['db']
-        ];
+
 
         foreach($new_temp as $key=>$val){
 
@@ -74,7 +72,7 @@ class getDyUser extends Command
                             'fabulous_count'=>array_get($data,'fabulous_count'),
                             'dy_number_icon' => array_get($data,'dy_number_icon'),
                         ]);
-                        TempUser::delete(array_get($vv,'id'));
+                        TempUser::find(array_get($vv,'id'))->delete();
                     }
                     sleep(1);
                 }

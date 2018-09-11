@@ -61,7 +61,7 @@ class Collector
         $res['position'] = array_get($match3,2);
         $res['constellation'] = array_get($match4,2);
         $res['short_introduce'] = str_replace(' " ','',array_get($match5,1));
-        dd($res);
+
         return $res;
     }
 }
