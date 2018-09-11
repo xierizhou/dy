@@ -21,6 +21,7 @@ class Collector
         $data = GetMethod::make($url)->setReferer("https://www.douyin.com")->request();
         //$str = '<div class="subnav-title-name"><a href="http://www.autohome.com.cn/16/">一汽-大众-捷达</a></div>';
 
+
         $rule = '/<p class="nickname">(.*?)<\/p>/ies';
         preg_match($rule,$data['body'],$match);
 
@@ -45,7 +46,7 @@ class Collector
         preg_match($rule,$data['body'],$match6);
 
         $rule = '/(.*?)<i class="icon iconfont ">(.*?)<\/i>/s';
-        preg_match_all($rule,$match6[1],$match7);
+        preg_match_all($rule,array_get($match6,1),$match7);
 
 
 
@@ -60,7 +61,7 @@ class Collector
         $res['avatar'] = array_get($match2,1);
         $res['position'] = array_get($match3,2);
         $res['constellation'] = array_get($match4,2);
-        $res['short_introduce'] = str_replace(' " ','',array_get($match5,1));
+        $res['short_introduce'] = array_get($match5,1);
 
         return $res;
     }

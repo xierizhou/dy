@@ -53,7 +53,7 @@ class getDyUser extends Command
 
             $pro = new \swoole_process(function(\swoole_process $p) use($val){
                 foreach($val as $vv){
-
+                    sleep(1);
                     $url = array_get($vv,'url');
                     $data = Factory::createCollector()->getUserInfo($url);
 
@@ -82,12 +82,12 @@ class getDyUser extends Command
 
                             \DB::commit();
                         }catch (\Exception $exception){
-
                             \DB::rollBack();
+                            continue;
                         }
 
                     }
-                    sleep(1);
+
                 }
 
             });
