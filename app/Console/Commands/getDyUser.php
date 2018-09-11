@@ -22,7 +22,7 @@ class getDyUser extends Command
      */
     protected $description = 'Command description';
 
-    private $process_num = 5;
+    private $process_num = 4;
 
     /**
      * Create a new command instance.
