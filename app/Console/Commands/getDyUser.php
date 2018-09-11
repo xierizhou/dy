@@ -56,23 +56,36 @@ class getDyUser extends Command
 
                     $url = array_get($vv,'url');
                     $data = Factory::createCollector()->getUserInfo($url);
+
                     if(array_get($data,'nickname')){
-                        User::create([
-                            'dy_uid'=>array_get($data,'uid'),
-                            'dy_number'=>array_get($data,'dy_number'),
-                            'nickname'=>array_get($data,'nickname'),
-                            'avatar'=>array_get($data,'avatar'),
-                            'dy_url'=>$url,
-                            'dy_data_json'=> json_encode($data),
-                            'short_introduce'=>array_get($data,'short_introduce'),
-                            'position'=>array_get($data,'position'),
-                            'constellation'=>array_get($data,'constellation'),
-                            'follow_count'=>array_get($data,'follow_count'),
-                            'fans_count'=>array_get($data,'fans_count'),
-                            'fabulous_count'=>array_get($data,'fabulous_count'),
-                            'dy_number_icon' => array_get($data,'dy_number_icon'),
-                        ]);
-                        TempUser::find(array_get($vv,'id'))->delete();
+                        try{
+                            \DB::beginTransaction();
+                            $insert = [
+                                'dy_uid'=>array_get($data,'uid'),
+                                'dy_number'=>array_get($data,'dy_number'),
+                                'nickname'=>array_get($data,'nickname'),
+                                'avatar'=>array_get($data,'avatar'),
+                                'dy_url'=>$url,
+                                //'dy_data_json'=> json_encode($data),
+                                'short_introduce'=>array_get($data,'short_introduce'),
+                                'position'=>array_get($data,'position'),
+                                'constellation'=>array_get($data,'constellation'),
+                                'follow_count'=>array_get($data,'follow_count'),
+                                'fans_count'=>array_get($data,'fans_count'),
+                                'fabulous_count'=>array_get($data,'fabulous_count'),
+                                'dy_number_icon' => array_get($data,'dy_number_icon'),
+                            ];
+
+
+                            User::create($insert);
+                            TempUser::find(array_get($vv,'id'))->delete();
+
+                            \DB::commit();
+                        }catch (\Exception $exception){
+
+                            \DB::rollBack();
+                        }
+
                     }
                     sleep(1);
                 }
