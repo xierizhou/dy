@@ -147,15 +147,16 @@ class Http
 
         if($this->method == 'post'){
             curl_setopt($ch,CURLOPT_POST,1); //设置POST请求
+            @curl_setopt($ch,CURLOPT_POSTFIELDS,$this->data); //设置发送的数据
         }
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1); //将curl_exec()获取的信息以文件流的形式返回，而不是直接输出
-        @curl_setopt($ch,CURLOPT_POSTFIELDS,$this->data); //设置发送的数据
+        //
 
         // 返回 response_header, 该选项非常重要,如果不为 true, 只会获得响应的正文
         curl_setopt($ch, CURLOPT_HEADER, $this->isReturnHeader);
 
         if($this->referer){
-            curl_setopt ($ch, CURLOPT_REFERER, "http://www.xxxx.com/");
+            curl_setopt ($ch, CURLOPT_REFERER, $this->referer);
         }
 
         curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
