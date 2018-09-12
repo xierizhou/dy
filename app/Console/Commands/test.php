@@ -39,7 +39,6 @@ class test extends Command
     {
         $url = "http://buyercamp.xyz/apis/test/socket";
         //$body = file_get_contents($url);
-
         $ip = $this->get_rand_ip();
         $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->request();
         dd($data);

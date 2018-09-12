@@ -139,7 +139,6 @@ class Http
     }
 
     public function request(){
-
         $ch = curl_init(); //启动CURL 会话
         curl_setopt($ch, CURLOPT_URL, $this->url); //设置要访问的地址
 
