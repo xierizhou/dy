@@ -44,15 +44,10 @@ class getDyUser extends Command
 
         $temp = TempUser::all();
 
-        if(count($temp)<= 0){
-            echo "执行完毕";exit;
-        }
 
         $num = ceil(count($temp) / $this->process_num);
         $new_temp = array_chunk($temp->toArray(),$num);
-
-
-
+        
         foreach($new_temp as $key=>$val){
 
             $pro = new \swoole_process(function(\swoole_process $p) use($val){
@@ -99,10 +94,6 @@ class getDyUser extends Command
 
         }
         \swoole_process::wait();
-        swoole_timer_after(300000, function () {
-            $this->handle();
-
-        });
 
         return response()->json([
             'code' => 200,
