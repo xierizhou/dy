@@ -158,6 +158,10 @@ class Http
             curl_setopt ($ch, CURLOPT_REFERER, "http://www.xxxx.com/");
         }
 
+        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+        curl_setopt($ch, CURLOPT_PROXY, "localhost:1080");
+
+
 
         $result['body'] = curl_exec($ch);
 

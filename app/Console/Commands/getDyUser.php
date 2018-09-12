@@ -22,7 +22,7 @@ class getDyUser extends Command
      */
     protected $description = 'Command description';
 
-    private $process_num = 4;
+    private $process_num = 1;
 
     /**
      * Create a new command instance.
@@ -44,10 +44,37 @@ class getDyUser extends Command
 
         $temp = TempUser::all();
 
+        foreach($temp as $val){
+            $url = $val->url;
+            $data = Factory::createCollector()->getUserInfo($url);
+            $insert = [
+                'dy_uid'=>array_get($data,'uid'),
+                'dy_number'=>array_get($data,'dy_number'),
+                'nickname'=>array_get($data,'nickname'),
+                'avatar'=>array_get($data,'avatar'),
+                'dy_url'=>$url,
+                //'dy_data_json'=> json_encode($data),
+                'short_introduce'=>array_get($data,'short_introduce'),
+                'position'=>array_get($data,'position'),
+                'constellation'=>array_get($data,'constellation'),
+                'follow_count'=>array_get($data,'follow_count'),
+                'fans_count'=>array_get($data,'fans_count'),
+                'fabulous_count'=>array_get($data,'fabulous_count'),
+                'dy_number_icon' => array_get($data,'dy_number_icon'),
+            ];
 
+
+            User::create($insert);
+            $val->delete();
+        }
+        dd("ok");
         $num = ceil(count($temp) / $this->process_num);
         $new_temp = array_chunk($temp->toArray(),$num);
-        
+
+
+
+
+
         foreach($new_temp as $key=>$val){
 
             $pro = new \swoole_process(function(\swoole_process $p) use($val){

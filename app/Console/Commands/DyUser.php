@@ -138,18 +138,16 @@ class DyUser extends Command
 
             for ($i=55000000001;$i<56000000000;$i++){
 
-
                 $ip = $this->get_rand_ip();
-
                 file_put_contents(public_path("sql-6-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
                 $dytk =  getDyTkSign::get($data);
                 if(!preg_match("/^[A-Za-z0-9]+$/",$dytk)){
                     continue;
-
                 }
                 file_put_contents(public_path("sql-6.txt"),"('$url'),",FILE_APPEND);
+                sleep(1);
 
             }
         });
@@ -158,10 +156,7 @@ class DyUser extends Command
         $pro2 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=56000000001;$i<57000000000;$i++){
-
                 $ip = $this->get_rand_ip();
-
-
                 file_put_contents(public_path("sql-7-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -169,9 +164,9 @@ class DyUser extends Command
                 if(!preg_match("/^[A-Za-z0-9]+$/",$dytk)){
                     //dd("不能包含中文和特殊字符！");
                     continue;
-
                 }
                 file_put_contents(public_path("sql-7.txt"),"('$url'),",FILE_APPEND);
+                sleep(1);
 
             }
         });
@@ -180,11 +175,7 @@ class DyUser extends Command
         $pro3 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=57000000001;$i<58000000000;$i++){
-
-
                 $ip = $this->get_rand_ip();
-
-
                 file_put_contents(public_path("sql-8-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -195,6 +186,7 @@ class DyUser extends Command
 
                 }
                 file_put_contents(public_path("sql-8.txt"),"('$url'),",FILE_APPEND);
+                sleep(1);
 
             }
         });
@@ -203,12 +195,7 @@ class DyUser extends Command
         $pro4 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
             for ($i=58000000001;$i<59000000000;$i++){
-
                 $ip = $this->get_rand_ip();
-
-
-
-
                 file_put_contents(public_path("sql-9-s.txt"),"$i");
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -216,9 +203,9 @@ class DyUser extends Command
                 if(!preg_match("/^[A-Za-z0-9]+$/",$dytk)){
                     //dd("不能包含中文和特殊字符！");
                     continue;
-
                 }
                 file_put_contents(public_path("sql-9.txt"),"('$url'),",FILE_APPEND);
+                sleep(1);
 
             }
         });
@@ -228,11 +215,7 @@ class DyUser extends Command
             echo $p->pid;
 
             for ($i=59000000001;$i<60000000000;$i++){
-
-
                 $ip = $this->get_rand_ip();
-
-
                 file_put_contents(public_path("sql-10-s.txt"),$i);
                 $url = "https://www.douyin.com/share/user/$i";
                 $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
@@ -240,10 +223,9 @@ class DyUser extends Command
                 if(!preg_match("/^[A-Za-z0-9]+$/",$dytk)){
                     //dd("不能包含中文和特殊字符！");
                     continue;
-
                 }
                 file_put_contents(public_path("sql-10.txt"),"('$url'),",FILE_APPEND);
-
+                sleep(1);
             }
         });
         $pro5->start();
