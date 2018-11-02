@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Tools\Curl\Method\GetMethod;
+use App\Curl\Handle\getDyTkSign;
+use App\Curl\Handle\getSignature;
+use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
     /**
@@ -74,7 +78,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $data = GetMethod::make($user->dy_url)->setReferer("https://www.douyin.com")->request();
+        $dytk =  getDyTkSign::get($data);
+        Redis::set($user->dy_uid.'_dytk',$dytk);
+        $js =   getSignature::get($user->dy_uid,$data);
+        return $js;
+
     }
 
     /**

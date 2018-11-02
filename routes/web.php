@@ -18,8 +18,4 @@ Route::get('/', function () {
 Route::get('/test', 'IndexController@test');
 
 
-Route::any('/getSignature', function(){
-
-    Redis::set(request('uid'), request('sign'));
-
-});
+Route::any('/getSignature', 'IndexController@getAwew');

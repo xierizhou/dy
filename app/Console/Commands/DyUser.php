@@ -39,6 +39,32 @@ class DyUser extends Command
      */
     public function handle()
     {
+        $ip = $this->get_rand_ip();
+        $url = "https://www.douyin.com/share/user/57720812347";
+        //$data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip","User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Mobile Safari/537.35"])->setReferer("https://www.baidu.com")->request();
+        $data = file_get_contents($url);
+        dd($data);
+
+        $i = 55000062145;
+        while (true){
+
+
+            $ip = $this->get_rand_ip();
+            file_put_contents(public_path("sql-11-s.txt"),$i);
+            $url = "https://www.douyin.com/share/user/$i";
+            $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip","User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/".rand(100,537).".36 (KHTML, like Gecko) Chrome/69.0.".rand(1000,3497).".81 Mobile Safari/".rand(100,537).".35"])->setReferer("https://www.baidu.com")->request();
+            $dytk =  getDyTkSign::get($data);
+
+            if(preg_match("/^[A-Za-z0-9]+$/",$dytk)){
+                file_put_contents(public_path("sql-11.txt"),"('$url'),",FILE_APPEND);
+            }
+
+            $i++;
+            if($i>=70000000000){
+                break;
+            }
+        }
+        echo "ok";exit;
 
 
         /*$pro1 = new \swoole_process(function(\swoole_process $p){
@@ -133,7 +159,7 @@ class DyUser extends Command
 
         //dd($this->get_rand_ip());aaa
 
-        $pro1 = new \swoole_process(function(\swoole_process $p){
+/*        $pro1 = new \swoole_process(function(\swoole_process $p){
             echo $p->pid;
 
             for ($i=55000000001;$i<56000000000;$i++){
@@ -231,7 +257,7 @@ class DyUser extends Command
         $pro5->start();
 
 
-        \swoole_process::wait();
+        \swoole_process::wait();*/
     }
 
 

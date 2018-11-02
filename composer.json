@@ -26,7 +26,9 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+			"Sunday\\SwooleCrontab\\":"packages/sunday/swoole-crontab/src/"
+
         }
     },
     "autoload-dev": {

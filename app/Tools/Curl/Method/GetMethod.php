@@ -15,6 +15,7 @@ use App\Tools\Curl\Http;
 class GetMethod extends Http
 {
     public static function make(String $url){
+
         return self::getInstance()->setMethod('get')->setUrl($url);
     }
 }

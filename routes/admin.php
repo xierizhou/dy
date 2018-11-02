@@ -16,4 +16,5 @@
 Route::group(['namespace' => 'Admin'],function(){
     Route::resource('user','UserController');
     Route::resource('temp/user','TempUserController');
+    Route::resource('/','IndexController');
 });

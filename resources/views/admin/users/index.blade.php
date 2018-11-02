@@ -57,7 +57,10 @@
 						<td>{{ $item->position }}</td>
 						<td>{{ $item->constellation }}</td>
 						<td>{{ $item->fans_count }}</td>
-						<td></td>
+						<td>
+							<button onclick="" class="layui-btn layui-btn-sm">视频</button>
+							<button onclick="ajax_request('{{ url('admin/user') }}/{{ $item->id }}','PATCH','',function(res){$('body').append(res),layer.msg('操作成功')})" class="layui-btn layui-btn-normal layui-btn-sm">更新</button>
+						</td>
 					</tr>
 				@endforeach
 			</tbody>

@@ -179,8 +179,9 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
-
         App\Providers\FactoryServiceProvider::class,
+
+        Sunday\SwooleCrontab\SwooleCrontabServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Factory' => App\Facades\FactoryFacade::class,
+
     ],
 
 ];

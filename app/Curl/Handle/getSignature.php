@@ -29,18 +29,18 @@ class getSignature
         $str .= "<script>";
         $str .= $file;
         $str .= "</script>";
-        echo $str;
+        return $str;
 
-        set_time_limit(10);
+        /*set_time_limit(10);
         $sign = '';
         while (true) {
-            $sign =  Redis::get('57720812347');
+            $sign =  Redis::get($user_id);
             if($sign){
                 break;
             }
         }
         set_time_limit(30);
-        return ['uid'=>$user_id,'signature'=>$sign];
+        return ['uid'=>$user_id,'signature'=>$sign];*/
     }
 
     public static function getSubStr($str, $leftStr, $rightStr){

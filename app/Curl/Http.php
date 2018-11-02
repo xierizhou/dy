@@ -144,6 +144,9 @@ class Http
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header); //设置请求头
 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // https请求 不验证证书和hosts
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+
         if($this->method == 'post'){
             curl_setopt($ch,CURLOPT_POST,1); //设置POST请求
             @curl_setopt($ch,CURLOPT_POSTFIELDS,$this->data); //设置发送的数据
@@ -158,8 +161,8 @@ class Http
             curl_setopt ($ch, CURLOPT_REFERER, $this->referer);
         }
 
-        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
-        curl_setopt($ch, CURLOPT_PROXY, "localhost:1080");
+        /*curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+        curl_setopt($ch, CURLOPT_PROXY, "localhost:1080");*/
 
 
 

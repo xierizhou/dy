@@ -6,44 +6,27 @@ use Illuminate\Http\Request;
 use App\Curl\Method\GetMethod;
 use App\Curl\Handle\getDyTkSign;
 use App\Curl\Handle\getSignature;
+use App\Models\User;
 class IndexController extends Controller
 {
-    public function test(){
+    public function getAwew(){
+        $uid = request('uid');
+        $sign = request('sign');
 
+        $dytk = \Redis::get(request('uid').'_dytk');
+        $url  = "https://www.douyin.com/aweme/v1/aweme/post/?user_id=$uid&count=25&max_cursor=0&aid=1128&_signature=$sign&dytk=$dytk";
+        $data = GetMethod::make($url)->setHeader([
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language: zh-CN,zh;q=0.9',
+            'Cache-Control: no-cache',
+            'Pragma: no-cache',
+            'Upgrade-Insecure-Requests: 1',
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36'
+        ])->request();
 
-        $url = "https://www.douyin.com/share/user/57720812347";
-        $ip = $this->get_rand_ip();
-        $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip"])->setReferer("https://www.douyin.com")->request();
+        User::where("dy_uid",$uid)->update([
+            'dy_data_json'=>$data['body']
+        ]);
 
-        $dytk =  getDyTkSign::get($data);
-
-
-/*        $sign =   getSignature::get(57720812347,$data);
-
-
-
-        $awm_url = "https://www.douyin.com/aweme/v1/aweme/post/?user_id=57720812347&count=80&max_cursor=0&aid=1128&_signature=ws6e6xASmVJo4d5r9SpCLsLOnv&dytk=4830f6e279a5f53872aab9e9dc112d33";
-
-        $data = GetMethod::make($awm_url)->setReferer("https://www.douyin.com")->request();
-
-        $data = json_decode($data['body'],true);
-        dd($data);*/
-        return 123;
-    }
-
-
-
-    public function signature(Request $request){
-        file_put_contents(public_path('test1.txt'),serialize($request->all()));
-    }
-
-    public function get_rand_ip(){
-        $arr_1 = array("218","218","66","66","218","218","60","60","202","204","66","66","66","59","61","60","222","221","66","59","60","60","66","218","218","62","63","64","66","66","122","211");
-        $randarr= mt_rand(0,count($arr_1));
-        $ip1id = $arr_1[$randarr];
-        $ip2id=  round(rand(600000,  2550000)  /  10000);
-        $ip3id=  round(rand(600000,  2550000)  /  10000);
-        $ip4id=  round(rand(600000,  2550000)  /  10000);
-        return  $ip1id . "." . $ip2id . "." . $ip3id . "." . $ip4id;
     }
 }
