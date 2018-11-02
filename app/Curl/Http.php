@@ -146,6 +146,7 @@ class Http
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // https请求 不验证证书和hosts
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
 
         if($this->method == 'post'){
             curl_setopt($ch,CURLOPT_POST,1); //设置POST请求
