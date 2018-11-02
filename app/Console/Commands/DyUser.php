@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Curl\Method\GetMethod;
 use App\Curl\Handle\getDyTkSign;
-use App\Curl\Handle\getSignature;
+
 class DyUser extends Command
 {
     /**
@@ -39,11 +39,11 @@ class DyUser extends Command
      */
     public function handle()
     {
-        $ip = $this->get_rand_ip();
+       /* $ip = $this->get_rand_ip();
         $url = "https://www.douyin.com/share/user/57720812347";
         //$data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip","User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Mobile Safari/537.35"])->setReferer("https://www.baidu.com")->request();
-        $data = file_get_contents($url);
-        dd($data);
+        $data = file_get_contents($url);*/
+
 
         $i = 55000062145;
         while (true){
