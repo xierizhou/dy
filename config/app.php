@@ -181,7 +181,7 @@ return [
 
         App\Providers\FactoryServiceProvider::class,
 
-        Sunday\SwooleCrontab\SwooleCrontabServiceProvider::class,
+        //Sunday\SwooleCrontab\SwooleCrontabServiceProvider::class,
 
     ],
 
