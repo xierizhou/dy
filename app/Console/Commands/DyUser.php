@@ -48,10 +48,11 @@ class DyUser extends Command
 
 
         $y = file_get_contents(public_path("sql-11-s.txt"));
-        $i = 55011849934;
+        $i = 55011849933;
         if($y>=$i){
             $i = $y;
         }
+        var_dump($i);exit;
 
         while (true){
 
