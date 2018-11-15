@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Curl\Method\GetMethod;
 use App\Curl\Handle\getDyTkSign;
-
+use Factory;
+use App\Models\User;
+use App\Models\TempUser;
 class DyUser extends Command
 {
     /**
@@ -45,19 +47,47 @@ class DyUser extends Command
         $data = file_get_contents($url);*/
 
 
-        $i = 55002790688;
+        $y = file_get_contents(public_path("sql-11-s.txt"));
+        $i = 55011849934;
+        if($y>=$i){
+            $i = $y;
+        }
+
         while (true){
 
 
-            $ip = $this->get_rand_ip();
+            //$ip = $this->get_rand_ip();
             file_put_contents(public_path("sql-11-s.txt"),$i);
             $url = "https://www.douyin.com/share/user/$i";
-            $data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip","User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/".rand(100,537).".36 (KHTML, like Gecko) Chrome/69.0.".rand(1000,3497).".81 Mobile Safari/".rand(100,537).".35"])->setReferer("https://www.baidu.com")->request();
+            /*$data = GetMethod::make($url)->setHeader(["CLIENT-IP:$ip", "X-FORWARDED-FOR:$ip","User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/".rand(100,537).".36 (KHTML, like Gecko) Chrome/69.0.".rand(1000,3497).".81 Mobile Safari/".rand(100,537).".35"])->setReferer("https://www.baidu.com")->request();
             $dytk =  getDyTkSign::get($data);
 
             if(preg_match("/^[A-Za-z0-9]+$/",$dytk)){
                 file_put_contents(public_path("sql-11.txt"),"('$url'),",FILE_APPEND);
-            }
+            }*/
+
+
+            $data = Factory::createCollector()->getUserInfo($url);
+            $insert = [
+                'dy_uid'=>array_get($data,'uid'),
+                'dy_number'=>array_get($data,'dy_number'),
+                'nickname'=>array_get($data,'nickname'),
+                'avatar'=>array_get($data,'avatar'),
+                'dy_url'=>$url,
+                //'dy_data_json'=> json_encode($data),
+                'short_introduce'=>array_get($data,'short_introduce'),
+                'position'=>array_get($data,'position'),
+                'constellation'=>array_get($data,'constellation'),
+                'follow_count'=>array_get($data,'follow_count'),
+                'fans_count'=>array_get($data,'fans_count'),
+                'fabulous_count'=>array_get($data,'fabulous_count'),
+                'dy_number_icon' => array_get($data,'dy_number_icon'),
+            ];
+
+
+            User::create($insert);
+
+
 
             $i++;
             if($i>=70000000000){
